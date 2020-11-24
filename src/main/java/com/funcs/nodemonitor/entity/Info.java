@@ -32,9 +32,9 @@ public class Info implements Serializable {
 
     private Float memory;
 
-    private Float netup;
+    private Float netout;
 
-    private Float netdown;
+    private Float netin;
 
     private Float ping;
 

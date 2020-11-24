@@ -28,17 +28,17 @@ public class InfoController {
 
     @Autowired
     InfoService infoService;
-    @GetMapping("/{serverId}")
+    @GetMapping("/get/{serverId}")
     public Result test(@PathVariable("serverId") Long serverId) {
         List serverStatus = infoService.list( new QueryWrapper<Info>().orderByAsc("time").eq("serverid", serverId));
 
         return Result.succ(serverStatus);
     }
 
-    @RequestMapping(value = "/up", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     /*
     Post format: json, in body
-    url:http://127.0.0.1:8080/info/up
+    url:http://127.0.0.1:8080/info/updete
     {
       "serverId": 1,
       "cpu": 34.44,
@@ -55,8 +55,8 @@ public class InfoController {
         info.setServerid(updateDto.getServerId());
         info.setCpu(updateDto.getCpu());
         info.setMemory(updateDto.getMemory());
-        info.setNetup(updateDto.getNetUp());
-        info.setNetdown(updateDto.getNetDown());
+        info.setNetout(updateDto.getNetOut());
+        info.setNetin(updateDto.getNetIn());
         info.setPing(updateDto.getPing());
         boolean indexId = infoService.saveOrUpdate(info);
         return Result.succ("Updated success"+indexId);

@@ -11,8 +11,8 @@ public class UpdateDto implements Serializable {
     private int serverId;
     private float cpu;
     private float memory;
-    private float netUp;
-    private float netDown;
+    private float netOut;
+    private float netIn;
     private float ping;
 
 }

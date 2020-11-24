@@ -25,11 +25,11 @@ public class Server implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String name;
+    private String servername;
 
-    private String location;
+    private String serverlocation;
 
-    private String describe;
+    private String serverdescribe;
 
     private String passwd;
 
