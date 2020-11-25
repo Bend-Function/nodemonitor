@@ -14,5 +14,6 @@ public class UpdateDto implements Serializable {
     private float netOut;
     private float netIn;
     private float ping;
+    private String pwd;
 
 }
