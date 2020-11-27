@@ -38,7 +38,7 @@ public class InfoController {
         return Result.succ(serverStatus);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+
     /*
     Post format: json, in body
     url:http://127.0.0.1:8080/info/updete
@@ -52,6 +52,7 @@ public class InfoController {
       "pwd": 123
     }
      */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Result update(@RequestBody UpdateDto updateDto){
 
         Server checkInfo = serverService.getOne(new QueryWrapper<Server>().eq("id", updateDto.getServerId()));
@@ -72,7 +73,7 @@ public class InfoController {
             info.setNetin(updateDto.getNetIn());
             info.setPing(updateDto.getPing());
             boolean indexId = infoService.saveOrUpdate(info);
-            return Result.succ("Updated success" + indexId);
+            return Result.succ("Updated success");
         }
     }
 }
