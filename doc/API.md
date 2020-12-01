@@ -26,12 +26,12 @@ GET /server/getone/{id}
 ## API usage
 
 ### Get a server's information
-```html
+```
 GET /info/get/{id}
 ```
 #### Request arguments
-| property| type | not null |Description |
-| ------- | ---- | -------- |----------- |
+| property| type | not null | Description |
+| ------- | ---- | -------- | ----------- |
 | id | int| Yes |Server's id |
 
 #### Return arguments
@@ -47,6 +47,7 @@ GET /info/get/{id}
 | success| Getting data successfully|
 | Not found | Can't found data in the 'info' table|
 
+Data will sort by time from early to latest.
 #### Example
 Request:
 ```
