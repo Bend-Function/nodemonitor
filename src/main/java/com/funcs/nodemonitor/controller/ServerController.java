@@ -2,15 +2,13 @@ package com.funcs.nodemonitor.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.funcs.nodemonitor.comon.dto.ServerUpdateDto;
 import com.funcs.nodemonitor.lang.Result;
 import com.funcs.nodemonitor.mapper.ServerMapper;
 import com.funcs.nodemonitor.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import com.funcs.nodemonitor.entity.Server;
 import java.util.List;
 
@@ -43,4 +41,21 @@ public class ServerController {
         List serverList = serverService.listMaps(queryWrapper);
         return  Result.succ(serverList);
     }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result add(@RequestBody ServerUpdateDto serverUpdateDto){
+        if("".equals(serverUpdateDto.getPassword())){
+            return Result.fail(400, "Password not found", null);
+        } else {
+            Server server = new Server();
+            server.setServername(serverUpdateDto.getServerName());
+            server.setServerlocation(serverUpdateDto.getServerLocation());
+            server.setServerdescribe(serverUpdateDto.getServerDescribe());
+            server.setPasswd(serverUpdateDto.getPassword());
+            boolean updateStatus = serverService.save(server);
+            return Result.succ("Updated success");
+        }
+
+    }
 }
+
