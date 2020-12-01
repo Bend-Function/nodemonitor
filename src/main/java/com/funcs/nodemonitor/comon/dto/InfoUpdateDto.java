@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.io.Serializable;
 
 @Data
-public class UpdateDto implements Serializable {
+public class InfoUpdateDto implements Serializable {
 
     private int serverId;
     private float cpu;

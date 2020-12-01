@@ -2,7 +2,7 @@ package com.funcs.nodemonitor.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.funcs.nodemonitor.comon.dto.UpdateDto;
+import com.funcs.nodemonitor.comon.dto.InfoUpdateDto;
 import com.funcs.nodemonitor.entity.Info;
 import com.funcs.nodemonitor.entity.Server;
 import com.funcs.nodemonitor.lang.Result;
@@ -53,26 +53,23 @@ public class InfoController {
     }
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result update(@RequestBody UpdateDto updateDto){
-
-        Server checkInfo = serverService.getOne(new QueryWrapper<Server>().eq("id", updateDto.getServerId()));
+    public Result update(@RequestBody InfoUpdateDto infoUpdateDto){
+        Server checkInfo = serverService.getOne(new QueryWrapper<Server>().eq("id", infoUpdateDto.getServerId()));
         if(checkInfo == null){
             return Result.fail(404,"ServerId not found", null);
         }
 
-        if(!checkInfo.getPasswd().equals(updateDto.getPwd())){
+        if(!checkInfo.getPasswd().equals(infoUpdateDto.getPwd())){
             return Result.fail(401, "Wrong Password.", null);
         }else {
             Info info = new Info();
-            System.out.println(updateDto.getCpu());
-
-            info.setServerid(updateDto.getServerId());
-            info.setCpu(updateDto.getCpu());
-            info.setMemory(updateDto.getMemory());
-            info.setNetout(updateDto.getNetOut());
-            info.setNetin(updateDto.getNetIn());
-            info.setPing(updateDto.getPing());
-            boolean indexId = infoService.saveOrUpdate(info);
+            info.setServerid(infoUpdateDto.getServerId());
+            info.setCpu(infoUpdateDto.getCpu());
+            info.setMemory(infoUpdateDto.getMemory());
+            info.setNetout(infoUpdateDto.getNetOut());
+            info.setNetin(infoUpdateDto.getNetIn());
+            info.setPing(infoUpdateDto.getPing());
+            boolean indexId = infoService.save(info);
             return Result.succ("Updated success");
         }
     }
