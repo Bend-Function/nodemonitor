@@ -52,8 +52,17 @@ public class ServerController {
             server.setServerlocation(serverUpdateDto.getServerLocation());
             server.setServerdescribe(serverUpdateDto.getServerDescribe());
             server.setPasswd(serverUpdateDto.getPassword());
-            boolean updateStatus = serverService.save(server);
-            return Result.succ("Updated success");
+            try {
+                boolean updateStatus = serverService.save(server);
+                if(updateStatus == true){
+                    return Result.succ("Updated success");
+                } else {
+                    return Result.fail(500, "Database Error", null);
+                }
+            } catch (Exception e){
+                return Result.fail(400, "Missing Parameters", null);
+            }
+
         }
 
     }

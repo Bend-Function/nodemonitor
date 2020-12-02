@@ -69,8 +69,16 @@ public class InfoController {
             info.setNetout(infoUpdateDto.getNetOut());
             info.setNetin(infoUpdateDto.getNetIn());
             info.setPing(infoUpdateDto.getPing());
-            boolean indexId = infoService.save(info);
-            return Result.succ("Updated success");
+            try {
+                boolean updateStatus = infoService.save(info);
+                if(updateStatus == true){
+                    return Result.succ("Updated success");
+                } else {
+                    return Result.fail(500, "Database Error", null);
+                }
+            } catch (Exception e){
+                return Result.fail(400, "Missing Parameters", null);
+            }
         }
     }
 }
