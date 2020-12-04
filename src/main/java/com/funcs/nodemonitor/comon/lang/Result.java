@@ -1,4 +1,4 @@
-package com.funcs.nodemonitor.lang;
+package com.funcs.nodemonitor.comon.lang;
 
 import lombok.Data;
 

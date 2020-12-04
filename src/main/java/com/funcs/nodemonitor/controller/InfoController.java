@@ -5,9 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.funcs.nodemonitor.comon.dto.InfoUpdateDto;
 import com.funcs.nodemonitor.entity.Info;
 import com.funcs.nodemonitor.entity.Server;
-import com.funcs.nodemonitor.lang.Result;
+import com.funcs.nodemonitor.comon.lang.Result;
 import com.funcs.nodemonitor.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.funcs.nodemonitor.service.InfoService;
@@ -53,7 +54,7 @@ public class InfoController {
     }
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result update(@RequestBody InfoUpdateDto infoUpdateDto){
+    public Result update(@Validated @RequestBody InfoUpdateDto infoUpdateDto){
         Server checkInfo = serverService.getOne(new QueryWrapper<Server>().eq("id", infoUpdateDto.getServerId()));
         if(checkInfo == null){
             return Result.fail(404,"ServerId not found", null);

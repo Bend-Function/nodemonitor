@@ -3,7 +3,7 @@ package com.funcs.nodemonitor.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.funcs.nodemonitor.comon.dto.ServerUpdateDto;
-import com.funcs.nodemonitor.lang.Result;
+import com.funcs.nodemonitor.comon.lang.Result;
 import com.funcs.nodemonitor.mapper.ServerMapper;
 import com.funcs.nodemonitor.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
