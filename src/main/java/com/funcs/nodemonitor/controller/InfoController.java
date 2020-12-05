@@ -1,6 +1,5 @@
 package com.funcs.nodemonitor.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.funcs.nodemonitor.comon.dto.InfoUpdateDto;
 import com.funcs.nodemonitor.entity.Info;
@@ -17,7 +16,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Function
@@ -32,9 +31,10 @@ public class InfoController {
     InfoService infoService;
     @Autowired
     ServerService serverService;
+
     @GetMapping("/get/{serverId}")
     public Result test(@PathVariable("serverId") Long serverId) {
-        List serverStatus = infoService.list( new QueryWrapper<Info>().orderByAsc("time").eq("serverid", serverId));
+        List serverStatus = infoService.list(new QueryWrapper<Info>().orderByAsc("time").eq("serverid", serverId));
 
         return Result.succ(serverStatus);
     }
@@ -54,15 +54,15 @@ public class InfoController {
     }
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result update(@Validated @RequestBody InfoUpdateDto infoUpdateDto){
+    public Result update(@Validated @RequestBody InfoUpdateDto infoUpdateDto) {
         Server checkInfo = serverService.getOne(new QueryWrapper<Server>().eq("id", infoUpdateDto.getServerId()));
-        if(checkInfo == null){
-            return Result.fail(404,"ServerId not found", null);
+        if (checkInfo == null) {
+            return Result.fail(404, "ServerId not found", null);
         }
 
-        if(!checkInfo.getPasswd().equals(infoUpdateDto.getPwd())){
+        if (!checkInfo.getPasswd().equals(infoUpdateDto.getPwd())) {
             return Result.fail(401, "Wrong Password.", null);
-        }else {
+        } else {
             Info info = new Info();
             info.setServerid(infoUpdateDto.getServerId());
             info.setCpu(infoUpdateDto.getCpu());
@@ -70,15 +70,20 @@ public class InfoController {
             info.setNetout(infoUpdateDto.getNetOut());
             info.setNetin(infoUpdateDto.getNetIn());
             info.setPing(infoUpdateDto.getPing());
+
             try {
                 boolean updateStatus = infoService.save(info);
-                if(updateStatus == true){
+                // check params not null and return warning.
+                if (infoUpdateDto.CheckNull().size() != 0) {
+                    return Result.fail(402, "Update was successful but Lost some params", infoUpdateDto.CheckNull());
+                }
+                if (updateStatus == true) {
                     return Result.succ("Updated success");
                 } else {
                     return Result.fail(500, "Database Error", null);
                 }
-            } catch (Exception e){
-                return Result.fail(400, "Missing Parameters", null);
+            } catch (Exception e) {
+                return Result.fail(500, "Server Error", null);
             }
         }
     }
