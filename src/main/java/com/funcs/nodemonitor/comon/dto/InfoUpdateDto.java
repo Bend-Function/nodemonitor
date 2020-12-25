@@ -37,7 +37,7 @@ public class InfoUpdateDto implements Serializable {
             nullParams.add("memory");
         }
         if (isEqual(this.netIn, zero)) {
-            nullParams.add("neiIn");
+            nullParams.add("netIn");
         }
         if (isEqual(this.netOut, zero)) {
             nullParams.add("netOut");
