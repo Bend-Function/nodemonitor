@@ -1,0 +1,197 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : node
+ Source Server Type    : MySQL
+ Source Server Version : 80022
+ Source Host           : 10.1.3.20:3309
+ Source Schema         : node
+
+ Target Server Type    : MySQL
+ Target Server Version : 80022
+ File Encoding         : 65001
+
+ Date: 25/12/2020 16:36:50
+*/
+
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+CREATE DATABASE `node`;
+USE `node`;
+-- ----------------------------
+-- Table structure for CPU
+-- ----------------------------
+DROP TABLE IF EXISTS `CPU`;
+CREATE TABLE `CPU`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `serverid` int(0) NOT NULL,
+  `cpusage` float(10, 2) NOT NULL,
+  `time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of CPU
+-- ----------------------------
+INSERT INTO `CPU` VALUES (1, 1, 10.32, '2020-11-14 02:21:27');
+INSERT INTO `CPU` VALUES (2, 2, 23.43, '2020-11-21 21:21:49');
+INSERT INTO `CPU` VALUES (3, 2, 0.11, '2020-11-21 22:22:14');
+INSERT INTO `CPU` VALUES (4, 1, 3.22, '2020-11-21 23:22:26');
+INSERT INTO `CPU` VALUES (5, 1, 86.77, '2020-11-22 02:22:41');
+INSERT INTO `CPU` VALUES (6, 1, 23.55, '2020-11-21 15:31:56');
+INSERT INTO `CPU` VALUES (7, 2, 21.55, '2020-11-23 19:07:22');
+INSERT INTO `CPU` VALUES (8, 1, 99.20, '2020-11-23 19:08:57');
+
+-- ----------------------------
+-- Table structure for info
+-- ----------------------------
+DROP TABLE IF EXISTS `info`;
+CREATE TABLE `info`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `serverid` int(0) NOT NULL,
+  `cpu` float NULL DEFAULT NULL,
+  `memory` float NULL DEFAULT NULL,
+  `netout` float NULL DEFAULT NULL,
+  `netin` float NULL DEFAULT NULL,
+  `ping` float NULL DEFAULT NULL,
+  `time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `id`(`serverid`) USING BTREE,
+  CONSTRAINT `id` FOREIGN KEY (`serverid`) REFERENCES `server` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of info
+-- ----------------------------
+INSERT INTO `info` VALUES (1, 1, 3, 342, 50, 53, 187, '2020-11-22 21:25:30');
+INSERT INTO `info` VALUES (2, 2, 50, 354, 40.23, 65.45, 23, '2020-11-22 21:26:01');
+INSERT INTO `info` VALUES (3, 1, 70, 574, 80, 78.9, 176, '2020-11-22 22:26:34');
+INSERT INTO `info` VALUES (4, 1, 45.7, 546, 58, 34, 32, '2020-11-23 00:26:57');
+INSERT INTO `info` VALUES (5, 1, 56, 453, 54, 34, 123, '2020-11-23 02:27:21');
+INSERT INTO `info` VALUES (7, 2, 44, 342, 99, 87, 65, '2020-11-22 18:33:10');
+INSERT INTO `info` VALUES (11, 1, 34.44, 334, 56.5, 54.3, 23, '2020-11-24 13:38:54');
+INSERT INTO `info` VALUES (12, 1, 34.44, 334, 8, 0, 23, '2020-11-25 20:36:30');
+INSERT INTO `info` VALUES (13, 1, 92.44, 124, 0, 0, 223, '2020-11-25 20:29:35');
+INSERT INTO `info` VALUES (14, 1, 92.44, 124, 56.5, 53.3, 223, '2020-11-25 20:30:04');
+INSERT INTO `info` VALUES (15, 1, 92.44, 124, 56.5, 53.3, 223, '2020-11-25 20:45:41');
+INSERT INTO `info` VALUES (16, 1, 92.44, 124, 56.5, 53.3, 223, '2020-11-26 09:27:39');
+INSERT INTO `info` VALUES (17, 1, 92.44, 124, 56.5, 53.3, 223, '2020-11-26 09:34:06');
+INSERT INTO `info` VALUES (18, 1, 56.3, 23.5, 54, 34, 32, '2020-11-26 09:42:54');
+INSERT INTO `info` VALUES (19, 1, 56.3, 23.5, 54, 34, 32, '2020-11-26 09:52:23');
+INSERT INTO `info` VALUES (20, 1, 0, 77.9, 0, 0, 36.5, '2020-11-26 09:56:32');
+INSERT INTO `info` VALUES (21, 1, 0, 79.3, 0, 0, 37.25, '2020-11-26 09:57:45');
+INSERT INTO `info` VALUES (22, 1, 33.3, 80, 0, 0, 34.5, '2020-11-26 09:59:08');
+INSERT INTO `info` VALUES (23, 1, 25, 80, 0, 0, 35.25, '2020-11-26 09:59:18');
+INSERT INTO `info` VALUES (24, 1, 0, 81.3, 0, 0, 37, '2020-11-26 10:01:00');
+INSERT INTO `info` VALUES (25, 1, 0, 78.9, 3.38, 6.16, 34.75, '2020-11-26 10:02:09');
+INSERT INTO `info` VALUES (26, 1, 57.1, 78.5, 0.32, 6.52, 42.5, '2020-11-26 10:02:20');
+INSERT INTO `info` VALUES (27, 1, 0, 78, 0.56, 4.8, 36.5, '2020-11-26 10:02:30');
+INSERT INTO `info` VALUES (28, 1, 17.8, 78.9, 1.04, 14.84, 35.5, '2020-11-26 10:03:23');
+INSERT INTO `info` VALUES (29, 1, 13.1, 78.5, 3.59, 13.35, 35.25, '2020-11-26 10:03:33');
+INSERT INTO `info` VALUES (30, 1, 12.9, 78.3, 0.09, 2.02, 35.75, '2020-11-26 10:03:43');
+INSERT INTO `info` VALUES (31, 1, 9.1, 78.2, 0.42, 21.5, 34.5, '2020-11-26 10:03:53');
+INSERT INTO `info` VALUES (32, 1, 8.9, 78.2, 0.75, 9.66, 38, '2020-11-26 10:04:03');
+INSERT INTO `info` VALUES (33, 1, 15.5, 77.8, 0.68, 6.43, 37.75, '2020-11-26 10:04:14');
+INSERT INTO `info` VALUES (34, 1, 12.4, 77.7, 14.29, 13, 36.25, '2020-11-26 10:04:24');
+INSERT INTO `info` VALUES (35, 1, 11.7, 77.5, 0.09, 0.73, 34.5, '2020-11-26 10:04:34');
+INSERT INTO `info` VALUES (36, 1, 11.5, 77.5, 0.09, 0.66, 38.25, '2020-11-26 10:04:44');
+INSERT INTO `info` VALUES (37, 1, 16.7, 80.7, 0.05, 0.77, 38, '2020-11-26 10:05:57');
+INSERT INTO `info` VALUES (38, 1, 11.9, 79.3, 1.06, 11.63, 36.5, '2020-11-26 10:06:08');
+INSERT INTO `info` VALUES (39, 1, 14.5, 82.3, 0.05, 1.29, 35.5, '2020-11-26 10:27:46');
+INSERT INTO `info` VALUES (40, 1, 12.6, 82, 0.96, 10.18, 35.75, '2020-11-26 10:34:52');
+INSERT INTO `info` VALUES (41, 1, 12.6, 81.8, 9.45, 11.36, 38, '2020-11-26 10:35:01');
+INSERT INTO `info` VALUES (42, 1, 9.4, 81.8, 3.88, 19.17, 35.25, '2020-11-26 10:35:11');
+INSERT INTO `info` VALUES (43, 1, 10.1, 81.4, 0.09, 2.07, 34.5, '2020-11-26 10:35:21');
+INSERT INTO `info` VALUES (44, 1, 10, 81, 1.42, 15.47, 35.75, '2020-11-26 10:35:30');
+INSERT INTO `info` VALUES (45, 1, 10, 81.2, 0.75, 7.81, 36.5, '2020-11-26 10:35:40');
+INSERT INTO `info` VALUES (46, 1, 8.9, 81, 0.37, 7.28, 36.5, '2020-11-26 10:35:50');
+INSERT INTO `info` VALUES (47, 1, 9.6, 81.1, 1.01, 21.92, 38, '2020-11-26 10:35:59');
+INSERT INTO `info` VALUES (48, 1, 8.8, 81, 0, 1.66, 35.5, '2020-11-26 10:36:09');
+INSERT INTO `info` VALUES (49, 1, 10.9, 80.8, 0, 0.56, 35.5, '2020-11-26 10:36:19');
+INSERT INTO `info` VALUES (50, 1, 10.8, 80.9, 1.3, 6.46, 36.75, '2020-11-26 10:36:29');
+INSERT INTO `info` VALUES (51, 1, 9.5, 81, 0.39, 7.67, 34.25, '2020-11-26 10:36:38');
+INSERT INTO `info` VALUES (52, 1, 92.44, 124, 56.5, 53.3, 223, '2020-12-01 12:22:11');
+INSERT INTO `info` VALUES (53, 1, 92.44, 124, 0, 0, 223, '2020-12-01 12:44:06');
+INSERT INTO `info` VALUES (54, 2, 92.44, 124, 56.5, 53.3, 223, '2020-12-01 21:57:26');
+INSERT INTO `info` VALUES (55, 1, 0, 124, 56.5, 53.3, 223, '2020-12-02 19:36:43');
+INSERT INTO `info` VALUES (56, 1, 0, 124, 56.5, 53.3, 223, '2020-12-03 10:48:41');
+INSERT INTO `info` VALUES (57, 1, 0, 124, 56.5, 53.3, 223, '2020-12-04 15:06:37');
+INSERT INTO `info` VALUES (58, 1, 0, 124, 56.5, 53.3, 223, '2020-12-04 15:15:36');
+INSERT INTO `info` VALUES (59, 1, 0, 124, 56.5, 53.3, 223, '2020-12-04 15:15:44');
+INSERT INTO `info` VALUES (60, 2, 92.44, 124, 56.5, 53.3, 223, '2020-12-04 16:27:36');
+INSERT INTO `info` VALUES (61, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 16:41:50');
+INSERT INTO `info` VALUES (62, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 18:21:39');
+INSERT INTO `info` VALUES (63, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 18:21:45');
+INSERT INTO `info` VALUES (64, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 18:43:48');
+INSERT INTO `info` VALUES (65, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 18:44:38');
+INSERT INTO `info` VALUES (66, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 18:58:48');
+INSERT INTO `info` VALUES (67, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:27:55');
+INSERT INTO `info` VALUES (68, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:29:02');
+INSERT INTO `info` VALUES (69, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:31:52');
+INSERT INTO `info` VALUES (70, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:31:57');
+INSERT INTO `info` VALUES (71, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:31:58');
+INSERT INTO `info` VALUES (72, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:33:20');
+INSERT INTO `info` VALUES (73, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:33:24');
+INSERT INTO `info` VALUES (74, 2, 0, 124, 56.5, 53.3, 223, '2020-12-04 19:34:32');
+INSERT INTO `info` VALUES (75, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:41:06');
+INSERT INTO `info` VALUES (76, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:42:25');
+INSERT INTO `info` VALUES (77, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:43:20');
+INSERT INTO `info` VALUES (78, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:44:46');
+INSERT INTO `info` VALUES (79, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:44:47');
+INSERT INTO `info` VALUES (80, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:45:50');
+INSERT INTO `info` VALUES (81, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:46:30');
+INSERT INTO `info` VALUES (82, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:46:36');
+INSERT INTO `info` VALUES (83, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:47:01');
+INSERT INTO `info` VALUES (84, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:47:24');
+INSERT INTO `info` VALUES (85, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:47:28');
+INSERT INTO `info` VALUES (86, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:49:28');
+INSERT INTO `info` VALUES (87, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:51:53');
+INSERT INTO `info` VALUES (88, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:53:38');
+INSERT INTO `info` VALUES (89, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:54:17');
+INSERT INTO `info` VALUES (90, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:55:07');
+INSERT INTO `info` VALUES (91, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:55:13');
+INSERT INTO `info` VALUES (92, 2, 0, 124, 56.5, 53.3, 223, '2020-12-05 14:55:16');
+INSERT INTO `info` VALUES (93, 2, 0, 0, 56.5, 53.3, 223, '2020-12-05 14:57:52');
+INSERT INTO `info` VALUES (94, 2, 0, 0, 56.5, 53.3, 223, '2020-12-05 14:57:59');
+INSERT INTO `info` VALUES (95, 2, 0, 0, 56.5, 53.3, 223, '2020-12-05 14:58:41');
+INSERT INTO `info` VALUES (96, 2, 0, 0, 56.5, 53.3, 223, '2020-12-05 15:03:35');
+INSERT INTO `info` VALUES (97, 2, 0, 0, 56.5, 53.3, 223, '2020-12-05 15:04:11');
+INSERT INTO `info` VALUES (98, 2, 0, 0, 56.5, 53.3, 0, '2020-12-05 15:04:14');
+INSERT INTO `info` VALUES (99, 2, 0, 0, 56.5, 53.3, 0, '2020-12-05 15:08:55');
+INSERT INTO `info` VALUES (100, 2, 0, 0, 56.5, 53.3, 0, '2020-12-05 15:08:56');
+INSERT INTO `info` VALUES (101, 2, 0, 0, 56.5, 53.3, 223, '2020-12-05 15:10:39');
+INSERT INTO `info` VALUES (102, 2, 0, 0, 56.5, 53.3, 223, '2020-12-05 15:15:23');
+
+-- ----------------------------
+-- Table structure for server
+-- ----------------------------
+DROP TABLE IF EXISTS `server`;
+CREATE TABLE `server`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `servername` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `serverlocation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `serverdescribe` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `passwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of server
+-- ----------------------------
+INSERT INTO `server` VALUES (1, 'HK1', 'HK', 'NTT', '12a');
+INSERT INTO `server` VALUES (2, 'JP1', 'JP', 'AWS', '123');
+INSERT INTO `server` VALUES (3, 'TW1', 'TW', 'HiNet', '123');
+INSERT INTO `server` VALUES (4, 'JP2', 'JP', 'VU', '123');
+INSERT INTO `server` VALUES (5, 'Test-1', 'Test', 'Test', '12345');
+INSERT INTO `server` VALUES (6, 'Test-2', 'Test', 'Test', '12345');
+INSERT INTO `server` VALUES (7, 'Test-2', 'Test', 'Test', '12345');
+INSERT INTO `server` VALUES (8, '', '', '', '2');
+INSERT INTO `server` VALUES (9, 'Test2', 'Test', 'Test', '123');
+INSERT INTO `server` VALUES (10, 'Test2', NULL, 'Test', '123');
+INSERT INTO `server` VALUES (11, 'Test2', NULL, 'Test', '123');
+INSERT INTO `server` VALUES (12, 'Test2', NULL, NULL, '!23');
+INSERT INTO `server` VALUES (13, 'Test2', NULL, NULL, '!23');
+INSERT INTO `server` VALUES (14, 'Test2', NULL, NULL, '!23');
+INSERT INTO `server` VALUES (15, 'Test2', NULL, NULL, '!23');
+
+SET FOREIGN_KEY_CHECKS = 1;
